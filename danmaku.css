@@ -2,8 +2,11 @@
 /* 引入 Google Fonts 字体，理论上国内可以直接访问 */
 @import url('https://fonts.googleapis.com/css2?family=Jost:ital,wght@0,400;0,600;1,400;1,600&display=swap');
 
+/* ============== 全局设置 ============== */
 /* 全局背景透明，可保证 OBS 载入弹幕机的过程中背景全程透明 */
-body { background-color: rgba(0, 0, 0, 0); }
+body { 
+  background-color: rgba(0, 0, 0, 0); 
+}
 
 /* 全局事件变量 */
 .event {
@@ -14,49 +17,26 @@ body { background-color: rgba(0, 0, 0, 0); }
   /* 应用变量 */
   --event-danmaku-streamer-text: rgb(255, 255, 255);
   --event-danmaku-mod-text: rgb(255, 255, 255);
+  
+  /* 全局间距 */
+  margin: calc(var(--1px) * 8) 0;
 }
 
+/* ============== 弹幕样式配置 ============== */
 /* 配置弹幕变量 */
 .event--message {
   --text: rgb(89, 89, 89);
   --bg: rgb(244, 208, 90);
   --avatar-size: 18px;
-}
-
-/* 总督变量 */
-.event--message.guard-level--1 {
-  --bg: rgb(244, 208, 90);
-}
-
-/* 提督变量 */
-.event--message.guard-level--2 {
-  --bg: rgb(244, 208, 90);
-}
-
-/* 舰长变量 */
-.event--message.guard-level--3 {
-  --bg: rgb(244, 208, 90);
-}
-
-/* 主播变量 */
-.event--message.user-type--streamer {
-  --bg: rgb(255, 184, 245);
-}
-
-/* 全局间距 */
-.event {
-  margin: calc(var(--1px) * 8) 0;
-}
-
-/* 弹幕正文改为聊天泡泡样式 */
-.event--message {
+  
+  /* 弹幕正文改为聊天泡泡样式 */
   position: relative;
   display: flex;
   flex-direction: column;
   /*
     上方用户名字体偏小，下方文本字体偏大，导致下方 line-height 更高
     因此此处要调高上方 padding 来实现 visual align
-    */
+  */
   padding-left: calc(var(--1px) * 35);
   padding-right: calc(var(--1px) * 35);
   padding-top: calc(var(--1px) * 8);
@@ -65,44 +45,9 @@ body { background-color: rgba(0, 0, 0, 0); }
   font-weight: bold;
   background-color: var(--bg);
   overflow: hidden;
-  text-align: center;
   align-items: center;
-}
-/* 去除头像 */
-.event--message .avatar-wrap,
-.event--message .tabler-icon{
-  display: none;
 }
 
-/* 强制缩小用户名 */
-.event--message .username {
-  /* 不知道为什么右边有一块空白，只能右移用户名了 */
-  padding-left: calc(var(--1px) * 8);
-  padding-bottom: calc(var(--1px) * 4);
-  color: rgb(200,97,138);
-  /* opacity: .6; */
-  font-size: calc(var(--1px) * 14);
-  /* text-align: center;  */
-}
-/* 用户名居中 */
-/* .event-type--message .danmaku_meta__pco_K.meta {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  width: 100%;
-} */
-/* 隐藏舰长图标 */
-.event-type--message .meta .guard-badge {
-  display: none;
-}
-/* 隐藏房管图标 */
-.event-type--message .meta .mod-badge {
-  display: none;
-}
-/* 隐藏主播图标 */
-.event-type--message .meta .streamer-badge {
-  display: none;
-}
 /* 左侧樱花 */
 .event--message::before {
   content: "";
@@ -117,6 +62,7 @@ body { background-color: rgba(0, 0, 0, 0); }
   background-repeat: no-repeat;
   background-position: center;
 }
+
 /* 右侧对称樱花 */
 .event--message::after {
   content: "";
@@ -137,24 +83,48 @@ body { background-color: rgba(0, 0, 0, 0); }
   display: block;
 }
 
-.event--message .fans-medal {
+/* 去除头像 */
+.event--message .avatar-wrap,
+.event--message .tabler-icon {
   display: none;
-  /* position: absolute;
-  bottom: calc(var(--event-font-size) * -1.25);
-  right: calc(var(--event-font-size) * -.5);
-  border: none;
-  background: none;
-  font-weight: bold;
-  font-style: italic;
-  overflow: visible;
-  pointer-events: none; */
 }
 
-/* 修改粉丝勋章名称样式 */
+/* 强制缩小用户名 */
+.event--message .username {
+  /* 不知道为什么右边有一块空白，只能右移用户名了 */
+  padding-left: calc(var(--1px) * 8);
+  padding-bottom: calc(var(--1px) * 4);
+  color: rgb(200, 97, 138);
+  font-size: calc(var(--1px) * 14);
+}
+
+/* ============== 头衔与勋章 ============== */
+/* 隐藏舰长图标 */
+.event-type--message .meta .guard-badge {
+  display: none;
+}
+
+/* 隐藏房管图标 */
+.event-type--message .meta .mod-badge {
+  display: none;
+}
+
+/* 隐藏主播图标 */
+.event-type--message .meta .streamer-badge {
+  display: none;
+}
+
+/* 隐藏粉丝勋章相关 */
+.event--message .fans-medal {
+  display: none;
+}
+
 .event--message .fans-medal-content {
   display: none;
-  /* font-size: calc(var(--event-font-size) * 3);
-  opacity: .15; */
+}
+
+.event--message .fans-medal-level {
+  display: none;
 }
 
 /* 隐藏舰长图标 */
@@ -162,58 +132,223 @@ body { background-color: rgba(0, 0, 0, 0); }
   display: none;
 }
 
-/* 修改粉丝勋章等级样式 */
-.event--message .fans-medal-level {
+/* ============== 舰长等级样式 ============== */
+/* 总督变量 */
+.event--message.guard-level--1 {
+  --bg: rgb(244, 208, 90);
+}
+
+/* 提督变量 */
+.event--message.guard-level--2 {
+  --bg: rgb(244, 208, 90);
+}
+
+/* 舰长变量 */
+.event--message.guard-level--3 {
+  --bg: rgb(244, 208, 90);
+}
+
+/* 主播变量 */
+.event--message.user-type--streamer {
+  --bg: rgb(255, 184, 245);
+}
+
+/* ============== 礼物样式 ============== */
+/* 低价礼物隐藏 */
+.event-type--gift.event-show-as--normal.event-size--normal {
   display: none;
-  /* font-size: calc(var(--event-font-size) * 4);
-  filter: brightness(1000%) saturate(40%) opacity(0.4);
-  background: none; */
 }
 
-/* 一个简易的渐变淡出效果，可以让组件边缘看起来没那么突兀 */
-.event-list {
-  --offset: 30px;
-  -webkit-mask-image: linear-gradient(to bottom, rgba(0, 0, 0, 0), rgba(0, 0, 0, 1) var(--offset), rgba(0, 0, 0, 1) calc(100% - var(--offset)), rgba(0, 0, 0, 0));
-          mask-image: linear-gradient(to bottom, rgba(0, 0, 0, 0), rgba(0, 0, 0, 1) var(--offset), rgba(0, 0, 0, 1) calc(100% - var(--offset)), rgba(0, 0, 0, 0));
+/* 高价礼物，隐藏头像 */
+.event-type--gift.event-show-as--normal.event-size--highlight .avatar-wrap {
+  display: none;
 }
 
-/* .event-type--gift.event-show-as--normal.event-size--normal,
-.event-type--gift.event-show-as--normal.event-size--highlight,
-.event-type--mvp.event-show-as--normal,
-.event-type--red-envelope-start.event-show-as--normal,
-.event-type--red-envelope-result,
-.event-type--lottery-start.event-show-as--normal,
-.event-type--lottery-result,
-.event-type--superchat.event-show-as--normal,
-.event-type--toast.event-show-as--normal .avatar{
- display:none;
-} */
-
-/* 隐藏红包、天选 */
-/* .event-type--gift.event-show-as--normal.event-size--normal, */
-/* .event-type--gift.event-show-as--normal.event-size--highlight, */
-/* .event-type--mvp.event-show-as--normal, */
-.event-type--red-envelope-start.event-show-as--normal,
-.event-type--red-envelope-result,
-.event-type--lottery-start.event-show-as--normal,
-.event-type--lottery-result,
-/* .event-type--superchat.event-show-as--normal, */
-/* .event-type--toast.event-show-as--normal{ */
- display:none;
+/* 隐藏礼物图片 */
+.event-type--gift.event-show-as--normal.event-size--highlight .gift-icon-wrap {
+  display: none;
 }
 
+/* 头部样式 */
+.event-type--gift.event-show-as--normal.event-size--highlight .top {
+  display: flex;
+  flex-direction: column;
+}
+
+/* 用户名 */
+.event-type--gift.event-show-as--normal.event-size--highlight .username {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  opacity: .6;
+  font-size: calc(var(--1px) * 14);
+  line-height: 1.2;
+}
+
+.event-type--gift.event-show-as--normal.event-size--highlight {
+  padding-left: 60px;
+  padding-right: 60px;
+}
+
+/* 价格 */
+.event-type--gift.event-show-as--normal.event-size--highlight .price {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  opacity: .6;
+  font-size: calc(var(--1px) * 10);
+  line-height: 1.2;
+}
+
+/* 通用礼物样式 */
+.event--gift.event-show-as--normal {
+  position: relative;
+  flex-direction: column;
+  overflow: hidden;
+  text-align: center;
+  align-items: center;
+}
+
+/* 礼物樱花装饰 */
+.event--gift.event-show-as--normal::before {
+  content: "";
+  position: absolute;
+  left: calc(var(--1px) * 10);
+  top: 50%;
+  transform: translateY(-50%) scaleX(-1);
+  width: calc(var(--1px) * 20);
+  height: calc(var(--1px) * 20);
+  background-image: url("https://p.sda1.dev/23/f6e758daea2318100ce6b1479670cc65/cherry-blossom-pink.png");
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+.event--gift.event-show-as--normal::after {
+  content: "";
+  position: absolute;
+  right: calc(var(--1px) * 10);
+  top: 50%;
+  transform: translateY(-50%);
+  width: calc(var(--1px) * 20);
+  height: calc(var(--1px) * 20);
+  background-image: url("https://p.sda1.dev/23/f6e758daea2318100ce6b1479670cc65/cherry-blossom-pink.png");
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+/* 隐藏盲盒相关 */
+.price-blind-result {
+  display: none;
+}
+
+.gift-blind-name {
+  font-weight: bold;
+}
+
+/* ============== MVP礼物 ============== */
+.event-type--mvp.event-show-as--normal .avatar-wrap {
+  display: none;
+}
+
+.event-type--mvp.event-show-as--normal .mvp-icon-wrap {
+  display: none;
+}
+
+.event-type--mvp.event-show-as--normal {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.event-type--mvp.event-show-as--normal .top {
+  display: flex;
+  flex-direction: column;
+}
+
+.event-type--mvp.event-show-as--normal .username {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  opacity: .6;
+  font-size: calc(var(--1px) * 14);
+  line-height: 1.2;
+}
+
+.event-type--mvp.event-show-as--normal .price {
+  margin-top: calc(var(--1px) * -6);
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  opacity: .6;
+  font-size: calc(var(--1px) * 10);
+  line-height: 1.2;
+}
+
+/* 删除本来的CN¥标志 */
+.event-type--mvp.event-show-as--normal .price-currency {
+  display: none;
+}
+
+/* 增加新的货币标志并调整透明度、字重 */
+.event-type--mvp.event-show-as--normal .price-figure:before {
+  content: '¥';
+  opacity: 0.8;
+  font-weight: 400;
+}
+
+/* MVP样式 */
+.event--mvp.event-show-as--normal {
+  position: relative;
+  flex-direction: column;
+  overflow: hidden;
+  text-align: center;
+  align-items: center;
+  background-color: rgb(255, 0, 0);
+  color: rgba(255, 255, 255);
+}
+
+/* MVP樱花装饰 */
+.event--mvp.event-show-as--normal::before {
+  content: "";
+  position: absolute;
+  left: calc(var(--1px) * 10);
+  top: 50%;
+  transform: translateY(-50%) scaleX(-1);
+  width: calc(var(--1px) * 20);
+  height: calc(var(--1px) * 20);
+  background-image: url("https://p.sda1.dev/23/f6e758daea2318100ce6b1479670cc65/cherry-blossom-pink.png");
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+.event--mvp.event-show-as--normal::after {
+  content: "";
+  position: absolute;
+  right: calc(var(--1px) * 10);
+  top: 50%;
+  transform: translateY(-50%);
+  width: calc(var(--1px) * 20);
+  height: calc(var(--1px) * 20);
+  background-image: url("https://p.sda1.dev/23/f6e758daea2318100ce6b1479670cc65/cherry-blossom-pink.png");
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+/* ============== SuperChat样式 ============== */
 /* 不显示头像，如果只隐藏avatar，边框仍会存在 */
-.event-type--superchat.event-show-as--normal .avatar-wrap{
+.event-type--superchat.event-show-as--normal .avatar-wrap {
   display: none;
 }
 
 /* 仅对用户名居中处理 */
-.event-type--superchat.event-show-as--normal .username-wrap{
+.event-type--superchat.event-show-as--normal .username {
   display: flex;
   flex-direction: column;
-  align-items: center;
   width: 100%;
-  text-align: center;
   opacity: .6;
   font-size: calc(var(--1px) * 14);
   line-height: 1.2;
@@ -237,171 +372,22 @@ body { background-color: rgba(0, 0, 0, 0); }
   text-align: center;
   display: flex;
   justify-content: center;
-  /* 使用 flex 布局使子元素居中 */
   opacity: .6;
   font-size: calc(var(--1px) * 10);
   line-height: 1.2;
 }
 
-.event-type--superchat.event-show-as--normal {
-  text-align: center; /* 文本居中 */
-}
-
-/* 低价礼物 */
-.event-type--gift.event-show-as--normal.event-size--normal{
-  display: none;
-}
-
-/* 高价礼物，隐藏头像 */
-.event-type--gift.event-show-as--normal.event-size--highlight .avatar-wrap{
-  display: none;
-}
-
-/* 整体居中 */
-.event-type--gift{
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
-/* 隐藏礼物图片 */
-.event-type--gift.event-show-as--normal.event-size--highlight .gift-icon-wrap{
-  display: none;
-}
-
-/* 头部样式 */
-.event-type--gift.event-show-as--normal.event-size--highlight .top{
-  display: flex;
-  flex-direction: column;
-  /* align-items: center; */
-  /* padding-left: calc(var(--1px) * 35); */
-  /* padding-right: calc(var(--1px) * 0); */
-}
-
-/* 用户名 */
-.event-type--gift.event-show-as--normal.event-size--highlight .username{
-  display: flex;
-  flex-direction: column;
-  /* align-items: center; */
-  width: 100%;
-  /* text-align: center; */
-  opacity: .6;
-  font-size: calc(var(--1px) * 14);
-  line-height: 1.2;
-}
-
-.event-type--gift.event-show-as--normal.event-size--highlight{
-  padding-left: 60px;
-  padding-right: 60px;
-}
-
-/* 价格 */
-.event-type--gift.event-show-as--normal.event-size--highlight .price {
-  width: 100%;
-  /* text-align: center; */
-  display: flex;
-  justify-content: center;
-  /* 使用 flex 布局使子元素居中 */
-  opacity: .6;
-  font-size: calc(var(--1px) * 10);
-  line-height: 1.2;
-}
-
-/* 去除礼物图标占据的位置，我也不知道为什么 */
-.event--message .content,
-.event--toast .content,
-.event--gift.event-show-as--normal.event-size--highlight .content,
-.event--mvp.event-show-as--normal .content,
-.event--red-envelope-start.event-show-as--normal.event-size--highlight .content,
-.event--lottery-start.event-show-as--normal .content{
-  --avatar-size: 0;
-}
-
-/* 隐藏盲盒价格变化图标 */
-.price-blind-result {
-  display: none;
-}
-
-/* MVP礼物 */
-.event-type--mvp.event-show-as--normal .avatar-wrap{
-  display: none;
-}
-
-.event-type--mvp.event-show-as--normal .mvp-icon-wrap{
-  display: none;
-}
-
-.event-type--mvp.event-show-as--normal{
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
-.event-type--mvp.event-show-as--normal .top{
-  display: flex;
-  flex-direction: column;
-  /* align-items: center; */
-  /* padding-left: calc(var(--1px) * 35); */
-  /* padding-right: calc(var(--1px) * 0); */
-}
-
-.event-type--mvp.event-show-as--normal .username{
-  display: flex;
-  flex-direction: column;
-  /* align-items: center; */
-  width: 100%;
-  /* text-align: center; */
-  opacity: .6;
-  font-size: calc(var(--1px) * 14);
-  line-height: 1.2;
-}
-
-.event-type--mvp.event-show-as--normal .price {
-  margin-top: calc(var(--1px) * -6);
-  width: 100%;
-  /* text-align: center; */
-  display: flex;
-  justify-content: center;
-  /* 使用 flex 布局使子元素居中 */
-  opacity: .6;
-  font-size: calc(var(--1px) * 10);
-  line-height: 1.2;
-}
-
-/* 删除本来的CN¥标志 */
-.event-type--mvp.event-show-as--normal .price-currency {
-  display: none;
-}
-
-/* 增加新的货币标志并调整透明度、字重 */
-.event-type--mvp.event-show-as--normal .price-figure:before {
-  content: '¥';
-  opacity: 0.8;
-  font-weight: 400;
-}
-
-.event--superchat {
+.event--superchat.event-show-as--normal {
   position: relative;
-  /* display: flex; */
   flex-direction: column;
-  /*
-    上方用户名字体偏小，下方文本字体偏大，导致下方 line-height 更高
-    因此此处要调高上方 padding 来实现 visual align
-    */
-  /* padding-left: calc(var(--1px) * 35);
-  padding-right: calc(var(--1px) * 35); */
-  /* padding-top: calc(var(--1px) * 8); */
-  /* padding-bottom: calc(var(--1px) * 4); */
-  /* color: var(--text); */
   font-weight: bold;
-  /* background-color: var(--bg); */
   overflow: hidden;
   text-align: center;
   align-items: center;
 }
 
-/* 樱花 */
-.event--superchat::before {
+/* SuperChat樱花装饰 */
+.event--superchat.event-show-as--normal::before {
   content: "";
   position: absolute;
   left: calc(var(--1px) * 10);
@@ -414,7 +400,8 @@ body { background-color: rgba(0, 0, 0, 0); }
   background-repeat: no-repeat;
   background-position: center;
 }
-.event--superchat::after {
+
+.event--superchat.event-show-as--normal::after {
   content: "";
   position: absolute;
   right: calc(var(--1px) * 10);
@@ -428,148 +415,130 @@ body { background-color: rgba(0, 0, 0, 0); }
   background-position: center;
 }
 
-
-.event--gift {
-  position: relative;
-  /* display: flex; */
-  flex-direction: column;
-  /*
-    上方用户名字体偏小，下方文本字体偏大，导致下方 line-height 更高
-    因此此处要调高上方 padding 来实现 visual align
-    */
-  /* padding-left: calc(var(--1px) * 35);
-  padding-right: calc(var(--1px) * 35); */
-  /* padding-top: calc(var(--1px) * 8); */
-  /* padding-bottom: calc(var(--1px) * 4); */
-  /* color: var(--text); */
-  /* font-weight: bold; */
-  overflow: hidden;
-  text-align: center;
-  align-items: center;
-}
-
-/* 樱花 */
-.event--gift::before {
-  content: "";
-  position: absolute;
-  left: calc(var(--1px) * 10);
-  top: 50%;
-  transform: translateY(-50%) scaleX(-1);
-  width: calc(var(--1px) * 20);
-  height: calc(var(--1px) * 20);
-  background-image: url("https://p.sda1.dev/23/f6e758daea2318100ce6b1479670cc65/cherry-blossom-pink.png");
-  background-size: contain;
-  background-repeat: no-repeat;
-  background-position: center;
-}
-.event--gift::after {
-  content: "";
-  position: absolute;
-  right: calc(var(--1px) * 10);
-  top: 50%;
-  transform: translateY(-50%);
-  width: calc(var(--1px) * 20);
-  height: calc(var(--1px) * 20);
-  background-image: url("https://p.sda1.dev/23/f6e758daea2318100ce6b1479670cc65/cherry-blossom-pink.png");
-  background-size: contain;
-  background-repeat: no-repeat;
-  background-position: center;
-}
-
-.event--mvp {
-  position: relative;
-  /* display: flex; */
-  flex-direction: column;
-  /*
-    上方用户名字体偏小，下方文本字体偏大，导致下方 line-height 更高
-    因此此处要调高上方 padding 来实现 visual align
-    */
-  /* padding-left: calc(var(--1px) * 35);
-  padding-right: calc(var(--1px) * 35); */
-  /* padding-top: calc(var(--1px) * 8); */
-  /* padding-bottom: calc(var(--1px) * 4); */
-  /* color: var(--text); */
-  /* font-weight: bold; */
-  /* background-color: var(--bg); */
-  overflow: hidden;
-  text-align: center;
-  align-items: center;
-  background-color: rgb(255, 0, 0);
-  color:rgba(255, 255, 255)
-}
-
-/* 樱花 */
-.event--mvp::before {
-  content: "";
-  position: absolute;
-  left: calc(var(--1px) * 10);
-  top: 50%;
-  transform: translateY(-50%) scaleX(-1);
-  width: calc(var(--1px) * 20);
-  height: calc(var(--1px) * 20);
-  background-image: url("https://p.sda1.dev/23/f6e758daea2318100ce6b1479670cc65/cherry-blossom-pink.png");
-  background-size: contain;
-  background-repeat: no-repeat;
-  background-position: center;
-}
-.event--mvp::after {
-  content: "";
-  position: absolute;
-  right: calc(var(--1px) * 10);
-  top: 50%;
-  transform: translateY(-50%);
-  width: calc(var(--1px) * 20);
-  height: calc(var(--1px) * 20);
-  background-image: url("https://p.sda1.dev/23/f6e758daea2318100ce6b1479670cc65/cherry-blossom-pink.png");
-  background-size: contain;
-  background-repeat: no-repeat;
-  background-position: center;
-}
-
-/* 舰长 */
-.event-type--toast .avatar-wrap,
-.event-type--toast .toast-details-total-days-text-before,
-.event-type--toast .toast-details-total-days,
-.event-type--toast .toast-details-total-days-text-after{
+/* ============== 舰长相关样式 ============== */
+/* 舰长Toast样式 */
+.event-type--toast.event-show-as--normal .avatar-wrap,
+.event-type--toast.event-show-as--normal .toast-details-total-days-text-before,
+.event-type--toast.event-show-as--normal .toast-details-total-days,
+.event-type--toast.event-show-as--normal .toast-details-total-days-text-after {
   display: none;
+}
+
+.event--toast.event-show-as--normal {
+  position: relative;
+  --avatar-size: 0;
+  --badge-size: 0;
+  background-image: none;
+}
+
+.event-type--toast.event-show-as--normal .content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  text-align: center;
+  line-height: 1.2;
 }
 
 /* 仅对用户名居中处理 */
-.event-type--toast .username-wrap{
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  width: 100%;
-  text-align: center;
+.event-type--toast.event-show-as--normal .username {
   opacity: .6;
   font-size: calc(var(--1px) * 14);
   line-height: 1.2;
 }
 
 /* 删除本来的CN¥标志 */
-.event-type--toast .price-currency {
+.event-type--toast.event-show-as--normal .price-currency {
   display: none;
 }
 
 /* 增加新的货币标志并调整透明度、字重 */
-.event-type--toast .price-figure:before {
+.event-type--toast.event-show-as--normal .price-figure:before {
   content: '¥';
   opacity: 0.8;
   font-weight: 400;
 }
 
 /* 调整价格居中 */
-.event-type--toast .price {
+.event-type--toast.event-show-as--normal .price {
   width: 100%;
   text-align: center;
   display: flex;
   justify-content: center;
-  /* 使用 flex 布局使子元素居中 */
   opacity: .6;
   font-size: calc(var(--1px) * 10);
   line-height: 1.2;
 }
 
-.event-type--toast {
-  text-align: center; /* 文本居中 */
+/* 舰长Toast樱花装饰 */
+.event--toast.event-show-as--normal::before {
+  content: "";
+  position: absolute;
+  left: calc(var(--1px) * 10);
+  top: 50%;
+  transform: translateY(-50%) scaleX(-1);
+  width: calc(var(--1px) * 20);
+  height: calc(var(--1px) * 20);
+  background-image: url("https://p.sda1.dev/23/f6e758daea2318100ce6b1479670cc65/cherry-blossom-pink.png");
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+.event--toast.event-show-as--normal::after {
+  content: "";
+  position: absolute;
+  right: calc(var(--1px) * 10);
+  top: 50%;
+  transform: translateY(-50%);
+  width: calc(var(--1px) * 20);
+  height: calc(var(--1px) * 20);
+  background-image: url("https://p.sda1.dev/23/f6e758daea2318100ce6b1479670cc65/cherry-blossom-pink.png");
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+.event-type--toast.event-show-as--normal .toast-details-type {
+  font-weight: bold;
+}
+
+/* ============== 通用消息样式 ============== */
+.event-type--superchat.event-show-as--normal .message,
+.event-type--gift.event-show-as--normal .message,
+.event-type--toast.event-show-as--normal .message,
+.event-type--mvp.event-show-as--normal .message {
+  /* 标准字号 */
+  font-size: calc(var(--1px) * 16);
+}
+
+.event-type--mvp.event-show-as--normal .message,
+.event-type--gift.event-show-as--normal.event-size--highlight .message {
+  line-height: 1.2;
+}
+
+/* 去除礼物图标占据的位置 */
+.event--message.event-show-as--normal .content,
+.event--toast.event-show-as--normal .content,
+.event--gift.event-show-as--normal.event-size--highlight .content,
+.event--mvp.event-show-as--normal .content,
+.event--red-envelope-start.event-show-as--normal.event-size--highlight .content,
+.event--lottery-start.event-show-as--normal .content {
+  --avatar-size: 0;
+}
+
+/* ============== 其他样式 ============== */
+/* 一个简易的渐变淡出效果，可以让组件边缘看起来没那么突兀 */
+.event-list {
+  --offset: 30px;
+  -webkit-mask-image: linear-gradient(to bottom, rgba(0, 0, 0, 0), rgba(0, 0, 0, 1) var(--offset), rgba(0, 0, 0, 1) calc(100% - var(--offset)), rgba(0, 0, 0, 0));
+  mask-image: linear-gradient(to bottom, rgba(0, 0, 0, 0), rgba(0, 0, 0, 1) var(--offset), rgba(0, 0, 0, 1) calc(100% - var(--offset)), rgba(0, 0, 0, 0));
+}
+
+/* 隐藏红包、天选 */
+.event-type--red-envelope-start.event-show-as--normal,
+.event-type--red-envelope-result,
+.event-type--lottery-start.event-show-as--normal,
+.event-type--lottery-result {
+  display: none;
 }
