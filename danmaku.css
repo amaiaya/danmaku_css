@@ -24,10 +24,32 @@ body {
 
 /* ============== 弹幕样式配置 ============== */
 /* 配置弹幕变量 */
+
+/* ============== 舰长等级样式 ============== */
+/* 总督变量 */
+.event--message.guard-level--1 {
+  --bg: rgb(255,188,199);
+}
+
+/* 提督变量 */
+.event--message.guard-level--2 {
+  --bg: rgb(255,188,199);
+}
+
+/* 舰长变量 */
+.event--message.guard-level--3 {
+  --bg: rgb(255,188,199);
+}
+
+/* 主播变量 */
+.event--message.user-type--streamer {
+  --bg: rgb(244, 208, 90);
+}
+
 .event--message {
   --text: rgb(89, 89, 89);
-  --bg: rgb(244, 208, 90);
-  --avatar-size: 18px;
+  --bg: rgb(254,235,228);
+  --avatar-size: 0px;
   
   /* 弹幕正文改为聊天泡泡样式 */
   position: relative;
@@ -132,30 +154,9 @@ body {
   display: none;
 }
 
-/* ============== 舰长等级样式 ============== */
-/* 总督变量 */
-.event--message.guard-level--1 {
-  --bg: rgb(244, 208, 90);
-}
-
-/* 提督变量 */
-.event--message.guard-level--2 {
-  --bg: rgb(244, 208, 90);
-}
-
-/* 舰长变量 */
-.event--message.guard-level--3 {
-  --bg: rgb(244, 208, 90);
-}
-
-/* 主播变量 */
-.event--message.user-type--streamer {
-  --bg: rgb(255, 184, 245);
-}
-
 /* ============== 礼物样式 ============== */
 /* 低价礼物隐藏 */
-.event-type--gift.event-show-as--normal.event-size--normal {
+.event-type--gift.event-show-as--normal.event-size--normal .avatar-wrap{
   display: none;
 }
 
@@ -200,6 +201,14 @@ body {
   line-height: 1.2;
 }
 
+.event-type--gift.event-show-as--normal.event-size--normal .gift-icon-wrap {
+  display: none;
+}
+
+.event-type--gift.event-show-as--normal.event-size--normal .gift-details-name::before {
+  content: " ";
+}
+
 /* 通用礼物样式 */
 .event--gift.event-show-as--normal {
   position: relative;
@@ -210,7 +219,7 @@ body {
 }
 
 /* 礼物樱花装饰 */
-.event--gift.event-show-as--normal::before {
+.event--gift.event-show-as--normal.event-size--highlight::before {
   content: "";
   position: absolute;
   left: calc(var(--1px) * 10);
@@ -224,7 +233,7 @@ body {
   background-position: center;
 }
 
-.event--gift.event-show-as--normal::after {
+.event--gift.event-show-as--normal.event-size--highlight::after {
   content: "";
   position: absolute;
   right: calc(var(--1px) * 10);
@@ -530,9 +539,9 @@ body {
 /* ============== 其他样式 ============== */
 /* 一个简易的渐变淡出效果，可以让组件边缘看起来没那么突兀 */
 .event-list {
-  --offset: 30px;
-  -webkit-mask-image: linear-gradient(to bottom, rgba(0, 0, 0, 0), rgba(0, 0, 0, 1) var(--offset), rgba(0, 0, 0, 1) calc(100% - var(--offset)), rgba(0, 0, 0, 0));
-  mask-image: linear-gradient(to bottom, rgba(0, 0, 0, 0), rgba(0, 0, 0, 1) var(--offset), rgba(0, 0, 0, 1) calc(100% - var(--offset)), rgba(0, 0, 0, 0));
+  --offset: 100px;
+  -webkit-mask-image: linear-gradient(to bottom, rgba(0, 0, 0, 0), rgba(0, 0, 0, 1) var(--offset));
+  mask-image: linear-gradient(to bottom, rgba(0, 0, 0, 0), rgba(0, 0, 0, 1) var(--offset));
 }
 
 /* 隐藏红包、天选 */
